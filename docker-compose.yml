@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.3-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  web:
+    build: .
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py startscraping && service cron start && python manage.py crontab add && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8080:8000"
+    depends_on:
+      - db
+    links:
+      - db:db
+
+volumes:
+  postgres_data:

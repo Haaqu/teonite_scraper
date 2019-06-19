@@ -1,0 +1,7 @@
+Django==2.2.2
+djangorestframework==3.9.4
+requests==2.22.0
+beautifulsoup4==4.7.1
+django-crontab==0.7.1
+nltk==3.4.3
+psycopg2==2.8.3
